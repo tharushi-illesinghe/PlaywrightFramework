@@ -75,4 +75,4 @@ Reports include:
 - Test steps and logs
 - Pass/Fail/Skip status
 - Screenshots on failure
-- Browser used
+- Execution time
