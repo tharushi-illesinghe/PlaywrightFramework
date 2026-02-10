@@ -29,13 +29,13 @@ public class BaseTest {
     @Parameters({"browser"})
     public void setUp(Method method, String browser) {
 
-        // Initialize ExtentReports
-        extent = ReportManager.getReports();
-        test = extent.createTest(method.getName());
-
         factory = new PlaywrightFactory();
         page = factory.initBrowser(browser);
         context = factory.getContext();
+
+        // Initialize ExtentReports
+        extent = ReportManager.getReports();
+        test = extent.createTest(method.getName());
 
         // Log in report
         test.info("Browser initialized and new page opened");

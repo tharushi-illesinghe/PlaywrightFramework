@@ -12,15 +12,11 @@ public class ProductPage {
     private Page page;
     public Page getPage;
 
-    private String similarItemsHeader = "h2.y2nz:has-text('Similar items')";
-    private String similarProductLinks = "section.Udh2 a.QgWp[href]";
+    private String similarItemsHeader = "h2.S4K3";
+    private String similarProductLinks = "section.hg1B a.cGSI[href]";
 
     public ProductPage(Page page) {
         this.page = page;
-    }
-
-    public Page getPage() {
-        return page;
     }
 
     // Scroll down the page
@@ -30,8 +26,7 @@ public class ProductPage {
 
     // Wait for similar products section
     public void waitForSimilarProducts() {
-        page.waitForSelector(
-                "section.Udh2 a.QgWp[href]",
+        page.waitForSelector(similarProductLinks,
                 new Page.WaitForSelectorOptions()
                         .setTimeout(10000)
         );
@@ -40,7 +35,7 @@ public class ProductPage {
     public boolean isSimilarItemsDisplayed() {
         try {
             page.waitForSelector(similarItemsHeader,
-                    new Page.WaitForSelectorOptions().setTimeout(10000));
+                    new Page.WaitForSelectorOptions().setTimeout(20000));
             return true;
         } catch (PlaywrightException e) {
             return false;
@@ -63,23 +58,6 @@ public class ProductPage {
         return newTab;
     }
 
-//    public int getSimilarProductsCount() {
-//
-//        // Scroll to load Similar items
-//        page.mouse().wheel(0, 4000);
-//
-//        // Wait until similar products are visible
-//        page.waitForSelector(
-//                "section.Udh2 a.QgWp[href]",
-//                new Page.WaitForSelectorOptions()
-//                        .setState(WaitForSelectorState.VISIBLE)
-//                        .setTimeout(10000)
-//        );
-//
-//        // Return count
-//        return page.locator("section.Udh2 a.QgWp[href]").count();
-//    }
-
     public String getMainProductId() {
         String url = page.url();
 
@@ -90,7 +68,7 @@ public class ProductPage {
 
     public List<String> getSimilarProductIds() {
         List<String> ids = new ArrayList<>();
-        Locator similarLinks = page.locator("section.Udh2 a.QgWp[href]");
+        Locator similarLinks = page.locator(similarProductLinks);
 
         int count = similarLinks.count();
         for (int i = 0; i < count; i++) {
